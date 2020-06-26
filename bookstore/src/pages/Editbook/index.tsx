@@ -1,12 +1,19 @@
 import React from "react";
 
-// import { Container } from './styles';
-
+import { Container, Main } from "./styles";
+import { TiArrowBackOutline } from "react-icons/ti";
+import MainLayout from "../../components/layout/main";
+import Formbook from "../../components/formbook";
 const Editbook: React.FC = () => {
 	return (
-		<>
-			<h1>Edit book</h1>
-		</>
+		<MainLayout>
+			<Container>
+				<Main>
+					<TiArrowBackOutline size={32} />
+					<Formbook />
+				</Main>
+			</Container>
+		</MainLayout>
 	);
 };
 
