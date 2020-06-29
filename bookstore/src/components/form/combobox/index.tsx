@@ -1,36 +1,30 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import { Container } from "./styles";
-
+import { useSelector } from "react-redux";
+import { Store } from "../../../@types";
 interface Options {
-	value: string;
-	label: string;
+	setValue(title: string): void;
 }
 
-const ComboBox: React.FC = () => {
+const ComboBox: React.FC<Options> = (props) => {
 	const [selected, setSelected] = useState("");
-
-	const options = [
-		{ value: "uncategory", label: "Uncategory" },
-		{ value: "want", label: "Want to Read" },
-		{ value: "reading", label: "Reading" },
-		{ value: "read", label: "Read" },
-	];
+	const options = useSelector((state: Store) => state.categorys);
 
 	function handleChangeSelected(data: any) {
-		console.log(data);
 		const { value } = data;
 		setSelected(value);
-		console.log(selected);
+		props.setValue(value);
 	}
 
 	return (
 		<Container>
 			<Select options={options} onChange={(data) => handleChangeSelected(data)}>
-				<option value="uncategory">Uncategory</option>
-				<option value="want">Want to Read</option>
-				<option value="reading">Reading</option>
-				<option value="read">Read</option>
+				{options.map((item, key) => (
+					<option key={key} value={item.value}>
+						{item.label}
+					</option>
+				))}
 			</Select>
 		</Container>
 	);

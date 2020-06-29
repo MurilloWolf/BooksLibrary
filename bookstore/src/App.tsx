@@ -1,12 +1,30 @@
 import React from "react";
-import Routes from "./routes";
+import { Provider } from "react-redux";
 import GlobalStyles from "./styles/globalStyle";
+/* import PersistedState from "./utils/PersistedState";
+ */ import Routes from "./routes";
+import store from "./redux/store";
+
+/* const LocalStoreState = React.createContext({ persistStore: () => {} });
+ */
 function App() {
+	/* 	const [appState, setAppState] = PersistedState("BookStore", store);
+	 */ /* const saveStore = () => {
+		setAppState();
+	}; */
+
 	return (
-		<div className="App">
-			<GlobalStyles />
-			<Routes />
-		</div>
+		/* 		<LocalStore.Provider value={{ persistStore: saveStore }}>
+		 */
+
+		<Provider store={store}>
+			<div className="App">
+				<GlobalStyles />
+				<Routes />
+			</div>
+		</Provider>
+		/* 		</LocalStore.Provider>
+		 */
 	);
 }
 

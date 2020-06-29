@@ -18,6 +18,12 @@ export const Container = styled.div`
 			transform: scale(1);
 		}
 	}
+
+	form {
+		fieldset {
+			border: none;
+		}
+	}
 `;
 export const FormHeader = styled.div`
 	padding: 2rem;

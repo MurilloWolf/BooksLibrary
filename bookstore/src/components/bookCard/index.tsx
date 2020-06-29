@@ -3,12 +3,9 @@ import Category from "../category";
 import Comments from "../comments";
 import {
 	Container,
-	BookCategory,
-	BookDate,
 	BookHeader,
 	BookFooter,
 	BookBody,
-	BookStatus,
 	BookSubtitle,
 	BookTitle,
 } from "./styles";
