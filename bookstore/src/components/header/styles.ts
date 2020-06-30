@@ -9,7 +9,11 @@ export const Header = styled.header`
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	color: #fff;
+
+	a {
+		text-decoration: none;
+		color: #fff;
+	}
 	span {
 		margin: 0 0 0 2rem;
 		color: #e6af2e;

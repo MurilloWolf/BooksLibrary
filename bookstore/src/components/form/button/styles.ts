@@ -21,7 +21,7 @@ export const Container = styled.div<Props>`
 		max-width: 120px;
 		height: 48px;
 		border: none;
-
+		border-radius: 5px;
 		opacity: 1;
 		transition: opacity 0.2s ease;
 		svg {

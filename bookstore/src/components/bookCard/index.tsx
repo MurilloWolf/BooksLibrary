@@ -1,6 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Category from "../category";
 import Comments from "../comments";
+import { Store } from "../../@types";
 import {
 	Container,
 	BookHeader,
@@ -10,13 +12,32 @@ import {
 	BookTitle,
 } from "./styles";
 import Musk from "../../styles/assets/elon.jpg";
-const BookCard: React.FC = () => {
+
+interface Props {
+	book: {
+		id: number;
+		title: string;
+		description: string;
+		category: string;
+		date: string;
+		image: string;
+		deleted: boolean;
+	};
+}
+const BookCard: React.FC<Props | any> = (props) => {
+	const [label, value] = useSelector((state: Store) => {
+		const value = state.books.find((item) => item === props.book)?.category;
+		const label = state.categorys.find((item) => item.value === value)?.label;
+		return [label, value];
+	});
+
 	return (
 		<Container>
 			<BookHeader>
-				<BookTitle>Elon Musk - O empresário que antecipa o futuro</BookTitle>
+				<BookTitle>{props.book.title}</BookTitle>
 				<BookSubtitle>
-					<Category />
+					{console.log(value)}
+					<Category label={label} value={value} />
 					<p>
 						<span>Edited:</span> 05/06/2020
 					</p>
@@ -24,22 +45,12 @@ const BookCard: React.FC = () => {
 			</BookHeader>
 			<BookBody>
 				<div>
-					<img src={Musk} />
+					<img src={Musk} alt={props.book.title} />
 				</div>
 			</BookBody>
 			<BookFooter>
 				<h3>Description</h3>
-				<p>
-					Is simply dummy text of the printing and typesetting industry. Lorem
-					Ipsum has been the industry's standard dummy text ever since the
-					1500s, when an unknown printer took a galley of type and scrambled it
-					to make a type specimen book. It has survived not only five centuries,
-					but also the leap into electronic typesetting , remaining essentially
-					unchanged. It was popularised in the 1960s with the release of
-					Letraset sheets containing Lorem Ipsum passages, and more recently
-					with desktop publishing software like Aldus PageMaker including
-					versions of Lorem Ipsum
-				</p>
+				<p>{props.book.description}</p>
 			</BookFooter>
 			<Comments />
 		</Container>

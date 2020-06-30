@@ -9,6 +9,7 @@ import {
 	FormSubtitle,
 	ButtonBar,
 	Error,
+	SelectCategory,
 } from "./styles";
 import { TextField, ComboBox, Button, TextArea } from "../form";
 import { BsUpload } from "react-icons/bs";
@@ -42,6 +43,7 @@ const Formbook: React.FC = () => {
 				category,
 				date: "20/05/20",
 				image: "no image",
+				deleted: false,
 			};
 			dispatch(addBook(book));
 		}
@@ -73,7 +75,14 @@ const Formbook: React.FC = () => {
 			<form>
 				<fieldset>
 					<FormHeader>
-						<legend>Book</legend>
+						<FormSubtitle>
+							<legend>
+								Book{" "}
+								<p title="Esse campo é preenchido automaticamente">
+									Edited: 05/06/2020
+								</p>
+							</legend>
+						</FormSubtitle>
 						<TextField
 							onChange={(value) => setTitle(value)}
 							name="Title"
@@ -81,14 +90,9 @@ const Formbook: React.FC = () => {
 							content=""
 							error={titleError}
 						/>
-						<div>
+						<SelectCategory>
 							<ComboBox setValue={setCategory} />
-							<FormSubtitle>
-								<p title="Esse campo é preenchido automaticamente">
-									Edited: 05/06/2020
-								</p>
-							</FormSubtitle>
-						</div>
+						</SelectCategory>
 					</FormHeader>
 					<FormImageUpload>
 						<span>

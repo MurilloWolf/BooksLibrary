@@ -8,6 +8,9 @@ export const Container = styled.div`
 	animation-name: fade;
 	animation-duration: 0.5s;
 
+	h3 {
+		font-weight: lighter;
+	}
 	@keyframes fade {
 		from {
 			opacity: 0;
@@ -42,17 +45,17 @@ export const FormTitle = styled.h2`
 	color: #121212;
 `;
 export const FormSubtitle = styled.div`
-	width: 100%;
+	/* 	width: 100%;
 	margin: 1rem 0;
 	display: flex;
-	justify-content: flex-start;
+	justify-content: flex-end;
 	flex-flow: row wrap;
-	flex: 1;
+	flex: 1; */
+	margin: 1rem 0 0 0;
 	p {
 		color: #c4c4c4;
 		font-size: 1rem;
-		margin: auto;
-		align-self: flex-end;
+		margin: 0;
 	}
 `;
 export const FormImageUpload = styled.div`
@@ -89,10 +92,6 @@ export const FormFooter = styled.div`
 	}
 `;
 
-export const FormCategory = styled.div``;
-export const FormStatus = styled.div``;
-export const FormDate = styled.div``;
-
 export const InputText = styled.div`
 	width: 100%;
 	border-bottom: 2px solid #212121;
@@ -113,21 +112,6 @@ export const ComboBox = styled.div`
 	width: 100%;
 	select {
 		width: 100%;
-		/* 
-		margin: 5px 0;
-		box-shadow: 0 0 0 0;
-		border: 0 none;
-		outline: 0;
-		margin: 0;
-
-		height: 48px;
-		font-family: Arial, Helvetica, sans-serif;
-		font-size: 18px;
-		padding: 13px 20px 13px 12px;
-		text-indent: 12px;
-		text-overflow: "";
-
- */
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;
@@ -148,22 +132,6 @@ export const ButtonBar = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	margin: 1rem 0;
-
-	/* button {
-		appearance: none;
-		cursor: pointer;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		max-width: 120px;
-		height: 48px;
-		border: none;
-
-		svg {
-			align-self: auto;
-		}
-	} */
 `;
 
 interface ErrorProps {
@@ -179,4 +147,17 @@ export const Error = styled.div<ErrorProps>`
 	padding: 5px 5px;
 	background: #e45866;
 	color: #fff;
+`;
+
+export const SelectCategory = styled.div`
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	align-items: center;
+
+	@media screen and(max-width: 768px) {
+		flex-flow: column wrap;
+		align-items: flex-start;
+	}
 `;

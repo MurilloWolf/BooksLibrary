@@ -11,6 +11,7 @@ export interface Book {
 	category: string;
 	date: string;
 	image: string;
+	deleted: boolean;
 }
 
 export interface Comment {

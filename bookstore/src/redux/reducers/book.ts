@@ -1,4 +1,4 @@
-import { ADD_BOOK, EDIT_BOOK } from "../actions/actionTypes";
+import { ADD_BOOK, EDIT_BOOK, DELETE_BOOK } from "../actions/actionTypes";
 
 export interface Books {
 	type: string;
@@ -8,6 +8,7 @@ export interface Books {
 	category: string;
 	date: string;
 	image: string;
+	deleted: boolean;
 }
 
 const INITIAL_STATE = [
@@ -19,6 +20,7 @@ const INITIAL_STATE = [
 		category: "want",
 		date: "05/05/2020",
 		image: "no image",
+		deleted: false,
 	},
 ];
 
@@ -35,11 +37,24 @@ const Books = (state = INITIAL_STATE, action: Books) => {
 					category: action.category,
 					date: action.date,
 					image: action.image,
+					deleted: action.deleted,
 				},
 			];
 
 		case EDIT_BOOK:
 			return state;
+
+		case DELETE_BOOK:
+			//search id book
+			const newState = state.filter((book) => {
+				if (!book.deleted) {
+					if (book.id === action.id) book.deleted = true;
+				}
+
+				return book;
+			});
+
+			return newState;
 
 		default:
 			return state;

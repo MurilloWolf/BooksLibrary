@@ -5,14 +5,13 @@ export const Box = styled.div`
 	max-width: 125px;
 	text-align: center;
 	border-radius: 5px;
-	background: #e6af2e;
 	padding: 5px 1rem;
 	margin: 0 1rem 0 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 
-	font-weight: bold;
+	font-weight: normal;
 	p {
 		font-size: 12px !important;
 		color: #fff !important;

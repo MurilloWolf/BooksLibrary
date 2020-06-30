@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Select from "react-select";
-import { Container } from "./styles";
+
+import { Container, StyledSelect } from "./styles";
 import { useSelector } from "react-redux";
 import { Store } from "../../../@types";
 interface Options {
@@ -19,13 +19,18 @@ const ComboBox: React.FC<Options> = (props) => {
 
 	return (
 		<Container>
-			<Select options={options} onChange={(data) => handleChangeSelected(data)}>
+			<p>Categorys</p>
+			<StyledSelect
+				options={options}
+				onChange={(data: any) => handleChangeSelected(data)}
+				placeHolder="sapodja"
+			>
 				{options.map((item, key) => (
 					<option key={key} value={item.value}>
 						{item.label}
 					</option>
 				))}
-			</Select>
+			</StyledSelect>
 		</Container>
 	);
 };

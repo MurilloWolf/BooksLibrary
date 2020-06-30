@@ -14,6 +14,16 @@ export const Main = styled.main`
 	justify-content: space-evenly;
 `;
 
+export const Section = styled.section`
+	margin: 2rem 0;
+	padding: 2rem;
+	display: flex;
+	flex-flow: row wrap-reverse;
+	align-items: center;
+	justify-content: space-evenly;
+	text-align: center;
+`;
+
 export const Text = styled.div`
 	width: auto;
 	max-width: 525px;
@@ -69,17 +79,28 @@ export const Aside = styled.aside`
 	h1 {
 		font-size: 36px;
 		margin: 1rem 0;
+		font-weight: normal;
+	}
+
+	h2 {
+		font-size: 32px;
+		margin: 1rem 0;
+		font-weight: normal;
 	}
 
 	p {
 		font-size: 24px;
 		margin: 1rem 0;
 		color: #bbb;
+		font-weight: lighter;
 	}
 
 	@media screen and (max-width: 725px) {
 		p {
 			font-size: 16px;
+		}
+		h2 {
+			font-size: 24px;
 		}
 	}
 `;
@@ -135,5 +156,36 @@ export const InputText = styled.div`
 		font-size: 16px;
 		line-height: 1rem;
 		max-width: 120px;
+	}
+`;
+
+export const ButtonLink = styled.div`
+	background: #f9a826;
+	text-align: center;
+
+	width: 100%;
+	max-width: 120px;
+
+	a {
+		color: #fff;
+		text-decoration: none;
+
+		appearance: none;
+		transition: opacity 0.2s ease;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		max-width: 120px;
+		height: 48px;
+		border: none;
+
+		opacity: 1;
+		transition: opacity 0.2s ease;
+
+		:hover {
+			opacity: 0.8;
+		}
 	}
 `;

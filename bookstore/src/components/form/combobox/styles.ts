@@ -1,20 +1,18 @@
 import styled from "styled-components";
-
+import Select from "react-select";
 export const Container = styled.div`
-	margin: 24px 0;
-	width: 100%;
+	margin: 0;
+	width: 250px;
+	p {
+		margin: 5px 0;
+	}
 `;
 
-export const Select = styled.select`
+export const StyledSelect = styled(Select)`
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 	flex: 1;
-	background: #f0f0f5;
-	border-radius: 8px;
-	border: 0;
-	padding: 16px 24px;
-	font-size: 16px;
-	color: #6c6c80;
-	margin: 0 0 0 8px;
+
+	width: 200px;
 `;
