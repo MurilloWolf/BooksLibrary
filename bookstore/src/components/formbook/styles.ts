@@ -60,30 +60,38 @@ export const FormSubtitle = styled.div`
 `;
 export const FormImageUpload = styled.div`
 	width: auto;
-	margin: 2rem;
-	height: 320px;
-	max-height: 425px;
+	max-width: 560px;
+	margin: auto;
+	height: auto;
+
 	background: #f3f3f3;
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
+
 	align-items: center;
+	flex-flow: column wrap;
 	border: 2px dashed #c4c4c4;
-	cursor: pointer;
 
-	span {
-		width: 170px;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	img {
-		width: auto;
-		height: auto;
-		max-height: 350px;
-		display: none;
+	@media screen and(min-width: 768px) {
+		max-width: 768px;
 	}
 `;
+
+export const UrlImage = styled.div`
+	max-width: 300px;
+	max-height: 64px;
+	margin: auto;
+`;
+export const Preview = styled.div`
+	width: 100%;
+	height: 100%;
+	img {
+		width: inherit;
+		height: auto;
+		max-height: 350px;
+	}
+`;
+
 export const FormFooter = styled.div`
 	padding: 2rem;
 

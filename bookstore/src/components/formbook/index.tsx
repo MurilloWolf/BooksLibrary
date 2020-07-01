@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { debounce } from "lodash";
 import {
 	Container,
 	FormHeader,
@@ -10,6 +10,8 @@ import {
 	ButtonBar,
 	Error,
 	SelectCategory,
+	UrlImage,
+	Preview,
 } from "./styles";
 import { TextField, ComboBox, Button, TextArea } from "../form";
 import { BsUpload } from "react-icons/bs";
@@ -18,12 +20,16 @@ import Musk from "../../styles/assets/elon.jpg";
 import { addBook } from "../../redux/actions/book";
 
 const Formbook: React.FC = () => {
+	const noImage =
+		"https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png";
+
 	const dispatch = useDispatch();
 	/* State */
 	const [title, setTitle] = useState("");
 	const [auth, setAuth] = useState("");
 	const [description, setDescription] = useState("");
 	const [category, setCategory] = useState("uncategory");
+	const [image, setImage] = useState(noImage);
 
 	/* Errors */
 	const [titleError, setTitleError] = useState(false);
@@ -49,7 +55,7 @@ const Formbook: React.FC = () => {
 				description,
 				category,
 				date: dateFormat(),
-				image: "no image",
+				image,
 				deleted: false,
 				edited: false,
 			};
@@ -91,6 +97,15 @@ const Formbook: React.FC = () => {
 		return formatedDate;
 	}
 
+	function handleImage(value: string) {
+		const debounceValue = debounce((value) => {
+			if (value.trim() === "" || value === undefined || value === null)
+				setImage(noImage);
+			else setImage(value);
+		}, 1000);
+		debounceValue(value);
+	}
+
 	return (
 		<Container>
 			<form>
@@ -113,7 +128,7 @@ const Formbook: React.FC = () => {
 						/>
 						<TextField
 							onChange={(value) => setAuth(value)}
-							name="Title"
+							name="Auth"
 							placeHolder="Auth"
 							content=""
 							error={authError}
@@ -122,14 +137,19 @@ const Formbook: React.FC = () => {
 							<ComboBox setValue={setCategory} />
 						</SelectCategory>
 					</FormHeader>
+					<UrlImage>
+						<TextField
+							onChange={(value) => handleImage(value)}
+							name="Image_url"
+							placeHolder="Image_url"
+							content=""
+							error={authError}
+						/>
+					</UrlImage>
 					<FormImageUpload>
-						<span>
-							<BsUpload size={32} color="#212121" />
-							<p>Upload the image</p>
-						</span>
-						<div>
-							<img src={Musk} alt="elon musk" />
-						</div>
+						<Preview>
+							<img src={image} alt={title} />
+						</Preview>
 					</FormImageUpload>
 					<FormFooter>
 						<h3>Description</h3>
