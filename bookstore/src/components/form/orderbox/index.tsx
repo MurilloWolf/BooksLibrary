@@ -7,9 +7,19 @@ interface Options {
 	setValue(title: string): void;
 }
 
-const ComboBox: React.FC<Options> = (props) => {
+const OrderBox: React.FC<Options> = (props) => {
 	const [selected, setSelected] = useState("");
-	const options = useSelector((state: Store) => state.categorys);
+
+	const options = [
+		{
+			label: "alphabetic",
+			value: "alph",
+		},
+		{
+			label: "date",
+			value: "date",
+		},
+	];
 
 	function handleChangeSelected(data: any) {
 		const { value } = data;
@@ -19,19 +29,16 @@ const ComboBox: React.FC<Options> = (props) => {
 
 	return (
 		<Container>
-			<p>Categorys</p>
+			<p>Order By</p>
 			<StyledSelect
 				options={options}
 				onChange={(data: any) => handleChangeSelected(data)}
 			>
-				{options.map((item, key) => (
-					<option key={key} value={item.value}>
-						{item.label}
-					</option>
-				))}
+				<option value={"alph"}>alphabetic</option>
+				<option value={"date"}>date of create/edit</option>
 			</StyledSelect>
 		</Container>
 	);
 };
 
-export default ComboBox;
+export default OrderBox;

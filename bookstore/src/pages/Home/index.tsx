@@ -78,7 +78,7 @@ const Home: React.FC = () => {
 				</Aside>
 			</Section>
 			<Section>
-				<ScrollBar />
+				<ScrollBar category="reading" />
 			</Section>
 		</MainLayout>
 	);

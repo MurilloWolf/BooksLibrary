@@ -19,11 +19,17 @@ import { addBook } from "../../redux/actions/book";
 
 const Formbook: React.FC = () => {
 	const dispatch = useDispatch();
+	/* State */
 	const [title, setTitle] = useState("");
+	const [auth, setAuth] = useState("");
 	const [description, setDescription] = useState("");
 	const [category, setCategory] = useState("uncategory");
+
+	/* Errors */
 	const [titleError, setTitleError] = useState(false);
 	const [descriptionError, setDescriptionError] = useState(false);
+	const [authError, setAuthError] = useState(false);
+
 	const id = useSelector((state: any) => {
 		const sizeOfArray = state.books.length - 1;
 		const autoIncrement = state.books[sizeOfArray].id + 1;
@@ -39,11 +45,13 @@ const Formbook: React.FC = () => {
 			const book = {
 				id,
 				title,
+				auth,
 				description,
 				category,
-				date: "20/05/20",
+				date: dateFormat(),
 				image: "no image",
 				deleted: false,
+				edited: false,
 			};
 			dispatch(addBook(book));
 		}
@@ -60,6 +68,13 @@ const Formbook: React.FC = () => {
 			setTitleError(false);
 		}
 
+		if (auth.trim().length <= 0) {
+			setAuthError(true);
+			valid = false;
+		} else {
+			setAuthError(false);
+		}
+
 		if (description.trim().length <= 0) {
 			setDescriptionError(true);
 			valid = false;
@@ -68,6 +83,12 @@ const Formbook: React.FC = () => {
 		}
 
 		return valid;
+	}
+
+	function dateFormat() {
+		const date = new Date();
+		const formatedDate = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
+		return formatedDate;
 	}
 
 	return (
@@ -79,7 +100,7 @@ const Formbook: React.FC = () => {
 							<legend>
 								Book{" "}
 								<p title="Esse campo é preenchido automaticamente">
-									Edited: 05/06/2020
+									{dateFormat()}
 								</p>
 							</legend>
 						</FormSubtitle>
@@ -89,6 +110,13 @@ const Formbook: React.FC = () => {
 							placeHolder="Insert Title"
 							content=""
 							error={titleError}
+						/>
+						<TextField
+							onChange={(value) => setAuth(value)}
+							name="Title"
+							placeHolder="Auth"
+							content=""
+							error={authError}
 						/>
 						<SelectCategory>
 							<ComboBox setValue={setCategory} />

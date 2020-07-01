@@ -7,11 +7,13 @@ export interface Store {
 export interface Book {
 	id: number;
 	title: string;
+	auth: string;
 	description: string;
 	category: string;
 	date: string;
 	image: string;
 	deleted: boolean;
+	edited: boolean;
 }
 
 export interface Comment {

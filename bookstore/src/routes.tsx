@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Bookview from "./pages/Bookview";
 import Editbook from "./pages/Editbook";
+import CategoryView from "./pages/CategoryView";
+
 const Routes = () => {
 	return (
 		<Router>
@@ -16,6 +18,9 @@ const Routes = () => {
 				</Route>
 				<Route path="/editbook">
 					<Editbook />
+				</Route>
+				<Route path="/categoryView">
+					<CategoryView />
 				</Route>
 				<Route path="*">
 					<NotFound />
