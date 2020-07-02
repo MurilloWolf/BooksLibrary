@@ -30,6 +30,12 @@ const BookCard: React.FC<Props | any> = (props) => {
 		return [label, value];
 	});
 
+	function isEdited() {
+		if (props.book.edited) return "Edited: ";
+
+		return "Created: ";
+	}
+
 	return (
 		<Container>
 			<BookHeader>
@@ -38,7 +44,7 @@ const BookCard: React.FC<Props | any> = (props) => {
 					{console.log(value)}
 					<Category label={label} value={value} />
 					<p>
-						<span>Edited:</span> 05/06/2020
+						<span>{isEdited()}</span> 05/06/2020
 					</p>
 				</BookSubtitle>
 			</BookHeader>
