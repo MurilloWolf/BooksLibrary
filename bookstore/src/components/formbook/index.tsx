@@ -16,7 +16,8 @@ import {
 import { TextField, ComboBox, Button, TextArea } from "../form";
 import { Book } from "../../@types";
 import { addBook, editBook } from "../../redux/actions/book";
-
+import Okay from "../okay";
+import Modal from "../modal";
 interface Props {
 	book?: any;
 }
@@ -32,8 +33,10 @@ const Formbook: React.FC<Props> = (props) => {
 	const [description, setDescription] = useState("");
 	const [category, setCategory] = useState("uncategory");
 	const [image, setImage] = useState(noImage);
-
+	const [showModal, setShowModal] = useState(false);
+	const [finished, setFinished] = useState(false);
 	/* Errors */
+
 	const [titleError, setTitleError] = useState(false);
 	const [descriptionError, setDescriptionError] = useState(false);
 	const [authError, setAuthError] = useState(false);
@@ -45,7 +48,7 @@ const Formbook: React.FC<Props> = (props) => {
 		return autoIncrement;
 	});
 
-	function handleSave(event: React.FormEvent) {
+	async function handleSave(event: React.FormEvent) {
 		event.preventDefault();
 		const isValid = validateForm();
 
@@ -61,7 +64,8 @@ const Formbook: React.FC<Props> = (props) => {
 				deleted: false,
 				edited: false,
 			};
-			dispatch(addBook(book));
+			await dispatch(addBook(book));
+			setFinished(true);
 		}
 	}
 
@@ -113,6 +117,16 @@ const Formbook: React.FC<Props> = (props) => {
 		return valid;
 	}
 
+	function confirmeCancel() {
+		setShowModal(true);
+	}
+
+	function confirmeSave() {
+		setFinished(true);
+		/* const isValid = validateForm();
+		if (isValid) setShowModal(true); */
+	}
+
 	function dateFormat() {
 		const date = new Date();
 		const formatedDate = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
@@ -129,14 +143,13 @@ const Formbook: React.FC<Props> = (props) => {
 	}
 
 	function isEditing() {
-		return props?.book !== {};
+		return Object.keys(props.book).length !== 0;
 	}
 
 	function loadInfo() {
 		if (isEditing()) {
 			const { book } = props;
-			console.log("Load");
-			console.log(book);
+
 			setImage(book.image);
 			setTitle(book.title);
 			setDescription(book.description);
@@ -151,6 +164,7 @@ const Formbook: React.FC<Props> = (props) => {
 			<form>
 				<fieldset>
 					<FormHeader>
+						{console.log(props.book)}
 						<FormSubtitle>
 							<legend>
 								Book
@@ -182,13 +196,13 @@ const Formbook: React.FC<Props> = (props) => {
 							onChange={(value) => handleImage(value)}
 							name="Image_url"
 							placeHolder="Image_url"
-							content={image}
+							content={isEditing() ? props.book.image : ""}
 							error={authError}
 						/>
 					</UrlImage>
 					<FormImageUpload>
 						<Preview>
-							<img src={image} alt={title} />
+							<img src={isEditing() ? props.book.image : image} alt={title} />
 						</Preview>
 					</FormImageUpload>
 					<FormFooter>
@@ -201,19 +215,30 @@ const Formbook: React.FC<Props> = (props) => {
 							content={isEditing() ? props.book.description : ""}
 						/>
 						<ButtonBar>
-							<Button
-								onClick={isEditing() ? handleEdit : handleSave}
-								type="save"
-							>
+							<Button onClick={confirmeSave} type="save">
 								Save
 							</Button>
-							<Button onClick={() => {}} type="cancel">
+							<Button onClick={confirmeCancel} type="cancel">
 								Cancel
 							</Button>
 						</ButtonBar>
 					</FormFooter>
 				</fieldset>
 			</form>
+			<Modal
+				title={"Deseja cancelar a operação"}
+				show={showModal}
+				setShow={setShowModal}
+				action={() => alert("ação cancelada")}
+			/>
+			<Modal
+				title={"Deseja cadastrar o livro? "}
+				content={title}
+				show={showModal}
+				setShow={setShowModal}
+				action={isEditing() ? handleEdit : handleSave}
+			/>
+			<Okay show={finished} />
 		</Container>
 	);
 };
