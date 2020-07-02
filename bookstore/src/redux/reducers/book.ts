@@ -24,13 +24,13 @@ const INITIAL_STATE = [
 		date: "05/05/2020",
 		image: "https://m.media-amazon.com/images/I/51UoqRAxwEL.jpg",
 		deleted: false,
+		edited: false,
 	},
 ];
 
 const Books = (state = INITIAL_STATE, action: Books) => {
 	switch (action.type) {
 		case ADD_BOOK:
-			console.log(state);
 			return [
 				...state,
 				{
@@ -47,7 +47,21 @@ const Books = (state = INITIAL_STATE, action: Books) => {
 			];
 
 		case EDIT_BOOK:
-			return state;
+			const newBook = {
+				id: action.id,
+				title: action.title,
+				auth: action.auth,
+				description: action.description,
+				category: action.category,
+				date: action.date,
+				image: action.image,
+				deleted: action.deleted,
+				edited: action.edited,
+			};
+			console.log(newBook.id);
+			const filteredState = state.filter((item) => item.id !== newBook.id);
+			console.log(filteredState);
+			return [...filteredState, newBook];
 
 		case DELETE_BOOK:
 			//search id book

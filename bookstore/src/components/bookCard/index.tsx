@@ -11,7 +11,6 @@ import {
 	BookSubtitle,
 	BookTitle,
 } from "./styles";
-import Musk from "../../styles/assets/elon.jpg";
 
 interface Props {
 	book: {
@@ -45,7 +44,7 @@ const BookCard: React.FC<Props | any> = (props) => {
 			</BookHeader>
 			<BookBody>
 				<div>
-					<img src={Musk} alt={props.book.title} />
+					<img src={props.book.image} alt={props.book.title} />
 				</div>
 			</BookBody>
 			<BookFooter>

@@ -1,4 +1,4 @@
-import { ADD_BOOK, DELETE_BOOK } from "./actionTypes";
+import { ADD_BOOK, DELETE_BOOK, EDIT_BOOK } from "./actionTypes";
 
 interface Book {
 	id: number;
@@ -30,14 +30,20 @@ export const deleteBook = (id: string) => ({
 	id,
 });
 
-/* export const searchBooks = (filter: string, params: string) => {
-	let id;
-	if (filter === "category") id = -1;
-	else id = Number(params);
+export const editBook = (book: Book) => {
+	const act = {
+		type: EDIT_BOOK,
 
-	return {
-		type: SEARCH_BOOKS,
-		params,
-		id,
+		id: book.id,
+		title: book.title,
+		auth: book.auth,
+		description: book.description,
+		category: book.category,
+		date: book.date,
+		image: book.image,
+		deleted: false,
+		edited: book.edited,
 	};
-}; */
+
+	return act;
+};

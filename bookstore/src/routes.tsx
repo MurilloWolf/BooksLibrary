@@ -16,7 +16,7 @@ const Routes = () => {
 				<Route path="/bookview/:id">
 					<Bookview />
 				</Route>
-				<Route path="/editbook">
+				<Route path="/editbook/:id?">
 					<Editbook />
 				</Route>
 				<Route path="/categoryView">

@@ -64,13 +64,11 @@ export const FormImageUpload = styled.div`
 	margin: auto;
 	height: auto;
 
-	background: #f3f3f3;
 	display: flex;
 	justify-content: space-between;
 
 	align-items: center;
 	flex-flow: column wrap;
-	border: 2px dashed #c4c4c4;
 
 	@media screen and(min-width: 768px) {
 		max-width: 768px;

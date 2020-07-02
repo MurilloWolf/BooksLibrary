@@ -7,6 +7,7 @@ import { TiArrowBackOutline } from "react-icons/ti";
 import MainLayout from "../../components/layout/main";
 import BookCard from "../../components/bookCard";
 import Error404 from "../../components/erro404";
+
 const Bookview: React.FC = () => {
 	const { id } = useParams();
 	const book = useSelector((state: Store) =>

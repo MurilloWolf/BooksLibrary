@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "lodash";
 import {
@@ -14,14 +14,16 @@ import {
 	Preview,
 } from "./styles";
 import { TextField, ComboBox, Button, TextArea } from "../form";
-import { BsUpload } from "react-icons/bs";
+import { Book } from "../../@types";
+import { addBook, editBook } from "../../redux/actions/book";
 
-import Musk from "../../styles/assets/elon.jpg";
-import { addBook } from "../../redux/actions/book";
+interface Props {
+	book?: any;
+}
 
-const Formbook: React.FC = () => {
+const Formbook: React.FC<Props> = (props) => {
 	const noImage =
-		"https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png";
+		"https://conectaibrasil.com.br/Assets/Images/New/no-image-02.png";
 
 	const dispatch = useDispatch();
 	/* State */
@@ -60,6 +62,26 @@ const Formbook: React.FC = () => {
 				edited: false,
 			};
 			dispatch(addBook(book));
+		}
+	}
+
+	function handleEdit(event: React.FormEvent) {
+		const isValid = validateForm();
+
+		event.preventDefault();
+		if (isValid) {
+			const book = {
+				id: props.book.id,
+				title,
+				auth,
+				description,
+				category,
+				date: dateFormat(),
+				image,
+				deleted: false,
+				edited: true,
+			};
+			dispatch(editBook(book));
 		}
 	}
 
@@ -106,6 +128,24 @@ const Formbook: React.FC = () => {
 		debounceValue(value);
 	}
 
+	function isEditing() {
+		return props?.book !== {};
+	}
+
+	function loadInfo() {
+		if (isEditing()) {
+			const { book } = props;
+			console.log("Load");
+			console.log(book);
+			setImage(book.image);
+			setTitle(book.title);
+			setDescription(book.description);
+			setAuth(book.auth);
+		}
+	}
+
+	useEffect(loadInfo, []);
+
 	return (
 		<Container>
 			<form>
@@ -113,7 +153,7 @@ const Formbook: React.FC = () => {
 					<FormHeader>
 						<FormSubtitle>
 							<legend>
-								Book{" "}
+								Book
 								<p title="Esse campo é preenchido automaticamente">
 									{dateFormat()}
 								</p>
@@ -123,14 +163,14 @@ const Formbook: React.FC = () => {
 							onChange={(value) => setTitle(value)}
 							name="Title"
 							placeHolder="Insert Title"
-							content=""
+							content={isEditing() ? props.book.title : ""}
 							error={titleError}
 						/>
 						<TextField
 							onChange={(value) => setAuth(value)}
 							name="Auth"
 							placeHolder="Auth"
-							content=""
+							content={isEditing() ? props.book.auth : ""}
 							error={authError}
 						/>
 						<SelectCategory>
@@ -142,7 +182,7 @@ const Formbook: React.FC = () => {
 							onChange={(value) => handleImage(value)}
 							name="Image_url"
 							placeHolder="Image_url"
-							content=""
+							content={image}
 							error={authError}
 						/>
 					</UrlImage>
@@ -158,10 +198,13 @@ const Formbook: React.FC = () => {
 						</Error>
 						<TextArea
 							onChange={(value) => setDescription(value)}
-							content={description}
+							content={isEditing() ? props.book.description : ""}
 						/>
 						<ButtonBar>
-							<Button onClick={handleSave} type="save">
+							<Button
+								onClick={isEditing() ? handleEdit : handleSave}
+								type="save"
+							>
 								Save
 							</Button>
 							<Button onClick={() => {}} type="cancel">
