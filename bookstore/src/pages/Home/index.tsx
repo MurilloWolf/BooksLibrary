@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
 	ButtonLink,
@@ -11,6 +11,10 @@ import {
 	Text,
 } from "./styles";
 import MainLayout from "../../components/layout/main";
+import { FilterBar } from "../CategoryView/styles";
+import ComboBox from "../../components/form/combobox";
+import OrderBox from "../../components/form/orderbox";
+
 import Reading1 from "../../styles/assets/reading1.svg";
 import Reading2 from "../../styles/assets/reading2.svg";
 import ScrollBar from "../../components/scroolBar";
@@ -18,6 +22,8 @@ import { useSelector } from "react-redux";
 import { Store } from "../../@types";
 
 const Home: React.FC = () => {
+	const [filter, setFilter] = useState("");
+	const [order, setOrder] = useState("");
 	const categorys = useSelector((state: Store) => {
 		return state.categorys;
 	});
@@ -78,7 +84,11 @@ const Home: React.FC = () => {
 				</Aside>
 			</Section>
 			<Section>
-				<ScrollBar category="reading" />
+				<ScrollBar category={filter} order={order} />
+				<FilterBar>
+					<ComboBox setValue={setFilter} />
+					<OrderBox setValue={setOrder} />
+				</FilterBar>
 			</Section>
 		</MainLayout>
 	);

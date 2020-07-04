@@ -122,9 +122,11 @@ const Formbook: React.FC<Props> = (props) => {
 	}
 
 	function confirmeSave() {
-		setFinished(true);
-		/* const isValid = validateForm();
-		if (isValid) setShowModal(true); */
+		const isValid = validateForm();
+		if (isValid) {
+			setShowModal(true);
+			setFinished(true);
+		}
 	}
 
 	function dateFormat() {
@@ -164,7 +166,6 @@ const Formbook: React.FC<Props> = (props) => {
 			<form>
 				<fieldset>
 					<FormHeader>
-						{console.log(props.book)}
 						<FormSubtitle>
 							<legend>
 								Book

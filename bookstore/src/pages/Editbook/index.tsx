@@ -25,8 +25,6 @@ const Editbook: React.FC = () => {
 		<MainLayout>
 			<Container>
 				<Main>
-					{console.log(book)}
-					<TiArrowBackOutline size={32} />
 					<Formbook book={book} />
 				</Main>
 			</Container>

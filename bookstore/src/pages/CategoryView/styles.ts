@@ -18,7 +18,6 @@ export const FilterBar = styled.div`
 	width: 100%;
 	max-width: 1224px;
 	height: 100%;
-	background: #eee;
 
 	@media screen and (max-width: 768px) {
 		margin: 1rem 0;

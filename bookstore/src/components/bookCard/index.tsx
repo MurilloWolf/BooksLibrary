@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import Category from "../category";
 import Comments from "../comments";
 import { Store } from "../../@types";
+import { FiEdit } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import {
 	Container,
 	BookHeader,
@@ -54,6 +56,12 @@ const BookCard: React.FC<Props | any> = (props) => {
 				</div>
 			</BookBody>
 			<BookFooter>
+				<Link
+					to={`/editBook/${props.book.id}`}
+					style={{ textDecoration: "none" }}
+				>
+					<FiEdit size={24} />
+				</Link>
 				<h3>Description</h3>
 				<p>{props.book.description}</p>
 			</BookFooter>
